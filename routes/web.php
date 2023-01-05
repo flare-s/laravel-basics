@@ -16,7 +16,7 @@ use App\Models\Post;
 */
 
 Route::get('/', function () {
-    return view('welcome', ['posts' => Post::all()]);
+    return view('welcome', ['posts' => Post::with('category')->get()]);
 });
 
 Route::get('posts/{post:slug}', function (Post $post) {
@@ -30,5 +30,5 @@ Route::get('categories/{category:slug}', function (Category $category) {
     // ddd($path);
 
 
-    return view('welcome', ['posts' => $category->posts]);
+    return view('welcome', ['posts' => $category->posts->load('category')]);
 });
