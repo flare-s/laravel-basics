@@ -16,6 +16,10 @@ class Post extends Model
         return $this->BelongsTo(Category::class);
     }
 
+    public function user() {
+        return $this->BelongsTo(User::class);
+    }
+
 
     // public function getRouteKeyName()
     // {
