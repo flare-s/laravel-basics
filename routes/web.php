@@ -17,25 +17,25 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('welcome', ['posts' => Post::latest()->get()]);
+    return view('welcome', ['posts' => Post::latest()->get(), 'categories' => Category::all()]);
 });
 
 Route::get('posts/{post:slug}', function (Post $post) {
     // ddd($path);
 
 
-    return view('post', ['post' => $post]);
+    return view('post', ['post' => $post, 'categories' => Category::all()]);
 });
 
 Route::get('categories/{category:slug}', function (Category $category) {
     // ddd($path);
 
 
-    return view('welcome', ['posts' => $category->posts]);
+    return view('welcome', ['posts' => $category->posts, 'Category' => $category, 'categories' => Category::all()]);
 });
 Route::get('authors/{author:username}', function (User $author) {
     // ddd($path);
 
 
-    return view('welcome', ['posts' => $author->posts]);
+    return view('welcome', ['posts' => $author->posts, 'categories' => Category::all()]);
 });
