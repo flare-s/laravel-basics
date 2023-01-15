@@ -32,8 +32,9 @@
             </svg>
         </div> --}}
 
-        <div x-data="{open: false}" class="relative flex py-1 flex-col lg:w-48 w-full lg:inline-flex items-center bg-gray-100 rounded-xl text-left">
-            <button class="px-3 w-full text-left flex items-center" @click.away="open = false" @click="open = !open">
+        <x-dropdown>
+            <x-slot name="trigger">
+            <button class="px-3 w-full text-left flex items-center">
                 {{ isset($currentCategory) ? $currentCategory->name : 'Categories' }} 
                 <svg class="transform ml-auto -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
                 height="22" viewBox="0 0 22 22">
@@ -45,13 +46,13 @@
                     </g>
                 </svg>
            </button>
-            <div class="flex flex-col w-full" x-show="open">
-                <a href="/" class="px-3 py-1 hover:bg-blue-500 hover:text-white">all</a>
+            </x-slot>
+                <x-dropdown-item href="/" :active="request()->routeIs('home')">all</x-dropdown-item>
                 @foreach ($categories as $category)
-                    <a href="/categories/{{ $category->slug }}" class="px-3 py-1 hover:bg-blue-500 hover:text-white {{ isset($currentCategory) && $currentCategory->is($category) ? 'bg-blue-500 text-white' : '' }}">{{ $category->name }}</a>
+                    <x-dropdown-item href="/categories/{{ $category->slug }}" :active="request()->is('categories/' . $category->slug)">{{ $category->name }}</x-dropdown-item>
+                    {{-- <x-dropdown-item href="/categories/{{ $category->slug }}" :active="isset($currentCategory) && $currentCategory->is($category)">{{ $category->name }}</x-dropdown-item> --}}
                 @endforeach
-            </div>
-        </div>
+        </x-dropdown>
 
         <!-- Other Filters -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">

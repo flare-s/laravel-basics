@@ -18,7 +18,7 @@ use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome', ['posts' => Post::latest()->get(), 'categories' => Category::all()]);
-});
+})->name('home');
 
 Route::get('posts/{post:slug}', function (Post $post) {
     // ddd($path);
