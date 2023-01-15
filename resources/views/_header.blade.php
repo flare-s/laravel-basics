@@ -34,7 +34,7 @@
 
         <div x-data="{open: false}" class="relative flex py-1 flex-col lg:w-48 w-full lg:inline-flex items-center bg-gray-100 rounded-xl text-left">
             <button class="px-3 w-full text-left flex items-center" @click.away="open = false" @click="open = !open">
-                {{ isSet($Category) ? $Category->name : 'Categories' }} 
+                {{ isset($currentCategory) ? $currentCategory->name : 'Categories' }} 
                 <svg class="transform ml-auto -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
                 height="22" viewBox="0 0 22 22">
                     <g fill="none" fill-rule="evenodd">
@@ -48,7 +48,7 @@
             <div class="flex flex-col w-full" x-show="open">
                 <a href="/" class="px-3 py-1 hover:bg-blue-500 hover:text-white">all</a>
                 @foreach ($categories as $category)
-                    <a href="/categories/{{ $category->slug }}" class="px-3 py-1 hover:bg-blue-500 hover:text-white {{ isSet($Category) && $Category->id === $category->id ? 'bg-blue-500 text-white' : '' }}">{{ $category->name }}</a>
+                    <a href="/categories/{{ $category->slug }}" class="px-3 py-1 hover:bg-blue-500 hover:text-white {{ isset($currentCategory) && $currentCategory->is($category) ? 'bg-blue-500 text-white' : '' }}">{{ $category->name }}</a>
                 @endforeach
             </div>
         </div>

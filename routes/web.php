@@ -31,7 +31,7 @@ Route::get('categories/{category:slug}', function (Category $category) {
     // ddd($path);
 
 
-    return view('welcome', ['posts' => $category->posts, 'Category' => $category, 'categories' => Category::all()]);
+    return view('welcome', ['posts' => $category->posts, 'currentCategory' => $category, 'categories' => Category::all()]);
 });
 Route::get('authors/{author:username}', function (User $author) {
     // ddd($path);
