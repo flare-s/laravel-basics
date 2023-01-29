@@ -21,6 +21,18 @@ class Post extends Model
         return $this->BelongsTo(User::class, "user_id");
     }
 
+    protected function scopeFilter($query, array $filters) {
+        // if ($filters['search'] ?? false) {
+        //     $query->where('title', 'like', '%' . $filters['search'] . '%')
+        //     ->orWhere('body', 'like', '%' . $filters['search'] . '%');
+        // }
+
+        $query->when($filters['search'] ?? false, function($query, $searchValue) {
+            $query->where('title', 'like', '%' . $searchValue . '%')
+            ->orWhere('body', 'like', '%' . $searchValue . '%');
+        });
+    }
+
 
     // public function getRouteKeyName()
     // {
