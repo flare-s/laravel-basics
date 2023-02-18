@@ -27,9 +27,9 @@ Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 //     return view('welcome', ['posts' => $category->posts, 'currentCategory' => $category, 'categories' => Category::all()]);
 // });
-Route::get('authors/{author:username}', function (User $author) {
-    // ddd($path);
+// Route::get('authors/{author:username}', function (User $author) {
+//     // ddd($path);
 
 
-    return view('posts.index', ['posts' => $author->posts, ]);
-});
+//     return view('posts.index', ['posts' => $author->posts, ]);
+// });
