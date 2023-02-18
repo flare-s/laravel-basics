@@ -17,7 +17,11 @@ class PostController extends Controller
         //     ->orWhere('body', 'like', '%' . request('search') . '%');
         // }
     
-        return view('welcome', ['posts' => Post::latest()->filter(request(['search']))->get(), 'categories' => Category::all()]);
+        return view('welcome', [
+            'posts' => Post::latest()->filter(request(['search', 'category']))->get(),
+            'categories' => Category::all(),
+            'currentCategory' => request('category') !== null  ? Category::firstWhere('slug', request('category')) : null
+        ]);
     }
 
     public function show(Post $post) {

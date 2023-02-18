@@ -31,6 +31,23 @@ class Post extends Model
             $query->where('title', 'like', '%' . $searchValue . '%')
             ->orWhere('body', 'like', '%' . $searchValue . '%');
         });
+
+        $query->when($filters['category'] ?? false, fn($query, $category) => 
+
+            // $query->whereExists(fn($query) =>
+            //     $query->from('categories')
+            //         ->whereColumn('categories.id', 'posts.category_id')
+            //         ->where('categories.slug', $category)
+            // ));
+
+            // $query->whereHas('category', function ($query) use ($category) {
+            //     $query->where('slug', $category);
+            // })
+
+            $query->whereHas('category', fn($query) =>
+                $query->where('slug', $category)
+            )
+        );
     }
 
 
