@@ -64,7 +64,7 @@ class Post extends Model
             // })
 
             $query->whereHas('author', fn($query) =>
-                $query->where('usernmae', $author)
+                $query->where('username', $author)
             )
         );
     }

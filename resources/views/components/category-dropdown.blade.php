@@ -13,9 +13,9 @@
         </svg>
    </button>
     </x-slot>
-        <x-dropdown-item href="/" :active="!$currentCategory">all</x-dropdown-item>
+        <x-dropdown-item href="/?{{ http_build_query(request()->except('category', 'page')) }}" :active="!$currentCategory">all</x-dropdown-item>
         @foreach ($categories as $category)
-            <x-dropdown-item href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category')) }}" :active="$currentCategory && $category->is( $currentCategory)">{{ $category->name }}</x-dropdown-item>
+            <x-dropdown-item href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category', 'page')) }}" :active="$currentCategory && $category->is( $currentCategory)">{{ $category->name }}</x-dropdown-item>
             {{-- <x-dropdown-item href="/categories/{{ $category->slug }}" :active="isset($currentCategory) && $currentCategory->is($category)">{{ $category->name }}</x-dropdown-item> --}}
         @endforeach
 </x-dropdown>
