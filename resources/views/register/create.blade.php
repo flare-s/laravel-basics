@@ -18,7 +18,12 @@
                            name="name"
                            id="name"
                            required
+                           value={{ old('name') }}
                     >
+
+                    @error('name')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6">
@@ -33,7 +38,12 @@
                            name="username"
                            id="username"
                            required
+                           value={{ old('username') }}
                     >
+
+                    @error('username')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6">
@@ -48,7 +58,12 @@
                            name="email"
                            id="email"
                            required
+                           value={{ old('email') }}
                     >
+
+                    @error('email')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6">
@@ -64,6 +79,10 @@
                            id="password"
                            required
                     >
+
+                    @error('password')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6">
@@ -73,6 +92,14 @@
                         Submit
                     </button>
                 </div>
+
+                @if ($errors->any())
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li class="text-red-500 text-xs">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
             </form>
         </main>
     </section>
