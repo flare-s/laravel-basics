@@ -8,13 +8,13 @@ class SessionsController extends Controller
 {
     public function create()
     {
-        return view('sessions.create');
+        return view('login.create');
     }
 
     public function store()
     {
         $attributes = request()->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
             'password' => 'required'
         ]);
 

@@ -28,6 +28,8 @@ Route::middleware('guest')->group(function() {
     Route::get('/register', [RegisterController::class, 'create']);
 
     Route::post('/register', [RegisterController::class, 'store']);
+    Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
+    Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 });
 
 
